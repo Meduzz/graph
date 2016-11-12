@@ -18,3 +18,11 @@ type (
 		RelationsEnding(end *Node, relation string) []*Node
 	}
 )
+
+func (n *Node) Equals(other *Node) bool {
+	return n.Id == other.Id
+}
+
+func (e *Edge) Equals(other *Edge) bool {
+	return e.Start.Equals(other.Start) && e.End.Equals(other.End) && e.Relation == other.Relation
+}
