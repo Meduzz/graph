@@ -5,16 +5,16 @@ type (
 		Id interface{}
 	}
 
-	Relation struct {
-		Type interface{}
-	}
-
 	Edge struct {
 		Start *Node
-		Relation *Relation
+		Relation string
 		End *Node
 	}
 
 	Graph interface {
+		Add(edge *Edge)
+		Remove(edge *Edge)
+		RelationsStarting(start *Node, relation string) []*Node
+		RelationsEnding(end *Node, relation string) []*Node
 	}
 )
