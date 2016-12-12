@@ -101,6 +101,14 @@ func TestPublicApi(t *testing.T) {
 	if g.DegreesIn(node1) > 1 {
 		t.Error("Node1 had more than 1 incoming relations.")
 	}
+
+	if !relationsContains(g.RelationsOut(node1), "LIKES") {
+		t.Error("Node1 did not have an outgoing relation of type LIKES.")
+	}
+
+	if !relationsContains(g.RelationsIn(node1), "LIKES") {
+		t.Error("Node1 did not have an incoming relation of type LIKES.")
+	}
 }
 
 func edgesContains(haystack []*Edge, needle *Edge) bool {
@@ -125,4 +133,17 @@ func nodesContains(haystack []*Node, needle *Node) bool {
 	}
 
 	return ret
+}
+
+func relationsContains(haystack []string, needle string) bool {
+	ret := false
+
+	for _, rel := range(haystack) {
+		if rel == needle {
+			ret = true
+		}
+	}
+
+	return ret
+
 }

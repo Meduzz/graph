@@ -20,6 +20,8 @@ type (
 		DegreesOutRelation(start *Node, relation string) int
 		DegreesIn(end *Node) int
 		DegreesInRelation(end *Node, relation string) int
+		RelationsOut(startNode *Node) []string
+		RelationsIn(endNode *Node) []string
 	}
 )
 

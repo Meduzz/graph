@@ -52,6 +52,14 @@ func (g *InmemoryGraph) DegreesInRelation(endNode *Node, relation string) int {
 	return len(filter(end(g.graph, endNode), relation))
 }
 
+func (g *InmemoryGraph) RelationsOut(startNode *Node) []string {
+	return relations(start(g.graph, startNode))
+}
+
+func (g *InmemoryGraph) RelationsIn(endNode *Node) []string {
+	return relations(end(g.graph, endNode))
+}
+
 func start(edges []*Edge, node *Node) []*Edge {
 	matched := make([]*Edge, 0)
 	for _, edge := range(edges) {
@@ -103,4 +111,14 @@ func startNodes(edges []*Edge) []*Node {
 	}
 
 	return nodes
+}
+
+func relations(edges []*Edge) []string {
+	relations := make([]string, 0)
+
+	for _, edge := range(edges) {
+		relations = append(relations, edge.Relation)
+	}
+
+	return relations
 }
