@@ -93,6 +93,14 @@ func TestPublicApi(t *testing.T) {
 	if !nodesContains(exists, node1) {
 		t.Error("Exists did not contain node1 after remove.")
 	}
+
+	if g.DegreesOut(node1) > 1 {
+		t.Error("Node1 had more than 1 outgoing relations.")
+	}
+
+	if g.DegreesIn(node1) > 1 {
+		t.Error("Node1 had more than 1 incoming relations.")
+	}
 }
 
 func edgesContains(haystack []*Edge, needle *Edge) bool {

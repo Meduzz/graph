@@ -16,6 +16,10 @@ type (
 		Remove(edge *Edge)
 		RelationsStarting(start *Node, relation string) []*Node
 		RelationsEnding(end *Node, relation string) []*Node
+		DegreesOut(start *Node) int
+		DegreesOutRelation(start *Node, relation string) int
+		DegreesIn(end *Node) int
+		DegreesInRelation(end *Node, relation string) int
 	}
 )
 
