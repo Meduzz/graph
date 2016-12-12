@@ -1,29 +1,28 @@
-package mem
+package graph
 
 import (
 	"testing"
-	"github.com/Meduzz/graph"
 )
 
 var (
-	node1 = &graph.Node{Id:1}
-	node2 = &graph.Node{Id:2}
-	node3 = &graph.Node{Id:3}
-	node4 = &graph.Node{Id:4}
+	node1 = &Node{Id:1}
+	node2 = &Node{Id:2}
+	node3 = &Node{Id:3}
+	node4 = &Node{Id:4}
 
 	likes = "LIKES"
 
-	edge1 = &graph.Edge{
+	edge1 = &Edge{
 		node1,
 		likes,
 		node2,
 	}
-	edge2 = &graph.Edge{
+	edge2 = &Edge{
 		node3,
 		likes,
 		node4,
 	}
-	edge3 = &graph.Edge{
+	edge3 = &Edge{
 		node4,
 		likes,
 		node1,
@@ -54,7 +53,7 @@ func TestInternalAPI(t *testing.T) {
 }
 
 func TestPublicApi(t *testing.T) {
-	g := GraphFromSlice([]*graph.Edge{edge1})
+	g := GraphFromSlice([]*Edge{edge1})
 
 	nodes := g.RelationsStarting(node1, likes)
 
@@ -96,7 +95,7 @@ func TestPublicApi(t *testing.T) {
 	}
 }
 
-func edgesContains(haystack []*graph.Edge, needle *graph.Edge) bool {
+func edgesContains(haystack []*Edge, needle *Edge) bool {
 	ret := false
 
 	for _, elem := range(haystack) {
@@ -108,7 +107,7 @@ func edgesContains(haystack []*graph.Edge, needle *graph.Edge) bool {
 	return ret
 }
 
-func nodesContains(haystack []*graph.Node, needle *graph.Node) bool {
+func nodesContains(haystack []*Node, needle *Node) bool {
 	ret := false
 
 	for _, elem := range(haystack) {
