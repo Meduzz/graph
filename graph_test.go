@@ -5,28 +5,28 @@ import (
 )
 
 var (
-	node1 = &Node{Id:1}
-	node2 = &Node{Id:2}
-	node3 = &Node{Id:3}
-	node4 = &Node{Id:4}
+	node1 = NewNode(1)
+	node2 = NewNode(2)
+	node3 = NewNode(3)
+	node4 = NewNode(4)
 
 	likes = "LIKES"
 
-	edge1 = &Edge{
+	edge1 = NewEdge(
 		node1,
 		likes,
 		node2,
-	}
-	edge2 = &Edge{
+	)
+	edge2 = NewEdge(
 		node3,
 		likes,
 		node4,
-	}
-	edge3 = &Edge{
+	)
+	edge3 = NewEdge(
 		node4,
 		likes,
 		node1,
-	}
+	)
 )
 
 func TestInternalAPI(t *testing.T) {

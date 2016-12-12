@@ -25,6 +25,14 @@ type (
 	}
 )
 
+func NewNode(id interface{}) *Node {
+	return &Node{Id:id}
+}
+
+func NewEdge(start *Node, relation string, end *Node) *Edge {
+	return &Edge{start, relation, end}
+}
+
 func (n *Node) Equals(other *Node) bool {
 	return n.Id == other.Id
 }
