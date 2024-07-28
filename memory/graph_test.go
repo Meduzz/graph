@@ -13,7 +13,7 @@ var (
 	node4 = graph.NewNode(4, "")
 	node5 = graph.NewNode(5, "")
 
-	likes = "LIKES"
+	likes = graph.NewRelation(1, "LIKES")
 
 	edge1 = graph.NewEdge(node1, likes, node2)
 	edge2 = graph.NewEdge(node3, likes, node4)
@@ -130,12 +130,12 @@ func TestStarts(t *testing.T) {
 func TestDegreenOut(t *testing.T) {
 	subject := EmptyGraph[int]()
 
-	rel := "a"
+	rel := graph.NewRelation(2, "a")
 
 	subject = subject.Add(graph.NewEdge(node1, rel, node2))
 	subject = subject.Add(graph.NewEdge(node1, rel, node3))
 
-	count := graph.DegreesOutRelation(subject, node1, rel)
+	count := graph.DegreesOutRelation(subject, node1, rel.Kind)
 
 	if count != 2 {
 		t.Errorf("count was not 2 but %d", count)
@@ -145,12 +145,12 @@ func TestDegreenOut(t *testing.T) {
 func TestDegreesIn(t *testing.T) {
 	subject := EmptyGraph[int]()
 
-	rel := "a"
+	rel := graph.NewRelation(2, "a")
 
 	subject = subject.Add(graph.NewEdge(node2, rel, node1))
 	subject = subject.Add(graph.NewEdge(node3, rel, node1))
 
-	count := graph.DegreesInRelation(subject, node1, rel)
+	count := graph.DegreesInRelation(subject, node1, rel.Kind)
 
 	if count != 2 {
 		t.Errorf("count was not 2 but %d", count)

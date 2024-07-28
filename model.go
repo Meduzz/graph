@@ -9,14 +9,19 @@ import (
 
 type (
 	Node[T comparable] struct {
-		ID   T `json:"id"`
-		Type string
+		ID   T      `json:"id"`
+		Kind string `json:"kind"`
+	}
+
+	Relation[T comparable] struct {
+		ID   T      `json:"id"`
+		Kind string `json:"kind"`
 	}
 
 	Edge[T comparable] struct {
-		Start    *Node[T] `json:"start"`
-		Relation string   `json:"relation"`
-		End      *Node[T] `json:"end"`
+		Start    *Node[T]     `json:"start"`
+		Relation *Relation[T] `json:"relation"`
+		End      *Node[T]     `json:"end"`
 	}
 
 	Graph[T comparable] interface {
@@ -55,7 +60,7 @@ func DegreesOutRelation[T comparable](g Graph[T], n *Node[T], relation string) i
 	count := 0
 
 	Traverse(g, n, true, func(e *Edge[T]) {
-		if e.Relation == relation {
+		if e.Relation.Kind == relation {
 			count++
 		}
 	})
@@ -68,7 +73,7 @@ func DegreesInRelation[T comparable](g Graph[T], n *Node[T], relation string) in
 	count := 0
 
 	Traverse(g, n, false, func(e *Edge[T]) {
-		if e.Relation == relation {
+		if e.Relation.Kind == relation {
 			count++
 		}
 	})
@@ -143,15 +148,19 @@ func DepthFirst[T comparable](g Graph[T], start *Node[T], visitor func(*Edge[T])
 }
 
 // NewNode creates a new node
-func NewNode[T comparable](id T, typ string) *Node[T] {
+func NewNode[T comparable](id T, kind string) *Node[T] {
 	return &Node[T]{
 		ID:   id,
-		Type: typ,
+		Kind: kind,
 	}
 }
 
+func NewRelation[T comparable](id T, kind string) *Relation[T] {
+	return &Relation[T]{id, kind}
+}
+
 // NewEdge creates a new edge
-func NewEdge[T comparable](start *Node[T], relation string, end *Node[T]) *Edge[T] {
+func NewEdge[T comparable](start *Node[T], relation *Relation[T], end *Node[T]) *Edge[T] {
 	return &Edge[T]{start, relation, end}
 }
 
@@ -163,7 +172,7 @@ func (n *Node[T]) Equals(other interface{}) bool {
 		return false
 	}
 
-	return n.ID == node.ID && n.Type == node.Type
+	return n.ID == node.ID && n.Kind == node.Kind
 }
 
 // Equals can compare 2 edges

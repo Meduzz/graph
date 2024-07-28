@@ -6,4 +6,4 @@ Lib now contains naive and above all unbounded ways to travel the graph. So plen
 
 ## future
 
-Type on the Node became a bit of an after thought. And might go away in the future. A base version of the graph and all traversal and stuff without the relation type could also worth looking into.
+Kind on the Node and Relation became a bit of an after thought. And might go away in the future. A base version of the graph and all traversal and stuff without the relation type could also worth looking into.
